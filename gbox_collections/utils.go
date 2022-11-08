@@ -1,6 +1,6 @@
 package gbox_collections
 
-func findDupElement[E comparable](slice []E) []E {
+func FindDupElement[E comparable](slice []E) []E {
 	checkMap := make(map[E]bool)
 	result := make([]E, 0, len(slice))
 	for _, one := range slice {
@@ -18,7 +18,7 @@ func findDupElement[E comparable](slice []E) []E {
 	return result
 }
 
-func findDupElementInUnComparable[E any, O comparable](slice []E, compareElementFunc func(e E) O) []E {
+func FindDupElementInUnComparable[E any, O comparable](slice []E, compareElementFunc func(e E) O) []E {
 	checkMap := make(map[O]bool)
 	result := make([]E, 0, len(slice))
 	for _, one := range slice {

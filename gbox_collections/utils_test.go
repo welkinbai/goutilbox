@@ -22,8 +22,8 @@ func Test_findDupElement(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findDupElement(tt.args.slice); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findDupElement() = %v, want %v", got, tt.want)
+			if got := FindDupElement(tt.args.slice); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindDupElement() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -77,8 +77,8 @@ func Test_findDupElementInUnComparable(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findDupElementInUnComparable(tt.args.slice, tt.args.compareElementFunc); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findDupElementInUnComparable() = %v, want %v", got, tt.want)
+			if got := FindDupElementInUnComparable(tt.args.slice, tt.args.compareElementFunc); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindDupElementInUnComparable() = %v, want %v", got, tt.want)
 			}
 		})
 	}
