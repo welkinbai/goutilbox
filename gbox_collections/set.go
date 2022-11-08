@@ -1,4 +1,4 @@
-package collections
+package gbox_collections
 
 type Set[E any] interface {
 	Size() int

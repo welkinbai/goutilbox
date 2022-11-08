@@ -1,4 +1,4 @@
-package collections
+package gbox_collections
 
 import "math"
 
@@ -8,17 +8,17 @@ type HashSet[E comparable] struct {
 
 var dummyValue any = struct{}{}
 
-func NewHashSet[E comparable]() HashSet[E] {
-	return HashSet[E]{m: make(map[E]any, 16)}
+func NewHashSet[E comparable]() *HashSet[E] {
+	return &HashSet[E]{m: make(map[E]any, 16)}
 }
 
-func NewHashSetWith[E comparable](c HashSet[E]) HashSet[E] {
+func NewHashSetWith[E comparable](c HashSet[E]) *HashSet[E] {
 	m := make(map[E]any, int(math.Max(float64(c.Size())/0.75+1.0, 16)))
-	return HashSet[E]{m: m}
+	return &HashSet[E]{m: m}
 }
 
-func NewHashSetWithSize[E comparable](size int) HashSet[E] {
-	return HashSet[E]{m: make(map[E]any, size)}
+func NewHashSetWithSize[E comparable](size int) *HashSet[E] {
+	return &HashSet[E]{m: make(map[E]any, size)}
 }
 
 func (h HashSet[E]) Size() int {

@@ -1,4 +1,4 @@
-package collections
+package gbox_collections
 
 import (
 	"reflect"
@@ -339,7 +339,7 @@ func TestNewHashSet(t *testing.T) {
 		name string
 		want HashSet[string]
 	}{
-		{"new", hashSet},
+		{"new", *hashSet},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
