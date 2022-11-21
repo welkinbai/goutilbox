@@ -1,4 +1,4 @@
-package gbox_collections
+package collections
 
 import (
 	"reflect"

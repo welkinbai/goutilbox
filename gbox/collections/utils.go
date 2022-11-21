@@ -1,4 +1,4 @@
-package gbox_collections
+package collections
 
 func FindDupElement[E comparable](slice []E) []E {
 	checkMap := make(map[E]bool)
