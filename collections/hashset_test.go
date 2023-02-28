@@ -23,7 +23,7 @@ func TestHashSet_Add(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := &hashSet[int]{
+			h := &HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.Add(tt.args.e); got != tt.want {
@@ -49,25 +49,25 @@ func TestHashSet_AddAll(t *testing.T) {
 		{
 			name:   "addAll",
 			fields: fields{m: make(map[int]any, 16)},
-			args:   args{c: hashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
+			args:   args{c: HashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
 			want:   true,
 		},
 		{
 			name:   "addAllExist",
 			fields: fields{m: map[int]any{1: struct{}{}, 2: struct{}{}}},
-			args:   args{c: hashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
+			args:   args{c: HashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
 			want:   false,
 		},
 		{
 			name:   "addAllEmpty",
 			fields: fields{m: map[int]any{1: struct{}{}, 2: struct{}{}}},
-			args:   args{c: hashSet[int]{m: map[int]any{}}},
+			args:   args{c: HashSet[int]{m: map[int]any{}}},
 			want:   false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.AddAll(tt.args.c); got != tt.want {
@@ -92,7 +92,7 @@ func TestHashSet_Clear(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			h.Clear()
@@ -131,7 +131,7 @@ func TestHashSet_Contains(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.Contains(tt.args.o); got != tt.want {
@@ -169,7 +169,7 @@ func TestHashSet_ContainsAll(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.ContainsAll(tt.args.c); got != tt.want {
@@ -195,19 +195,19 @@ func TestHashSet_Equals(t *testing.T) {
 		{
 			name:   "equalsYes",
 			fields: fields{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}},
-			args:   args{c: hashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}}},
+			args:   args{c: HashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}}},
 			want:   true,
 		},
 		{
 			name:   "equalsNo",
 			fields: fields{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}},
-			args:   args{c: hashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
+			args:   args{c: HashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}}}},
 			want:   false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.Equals(tt.args.c); got != tt.want {
@@ -239,7 +239,7 @@ func TestHashSet_IsEmpty(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.IsEmpty(); got != tt.want {
@@ -275,7 +275,7 @@ func TestHashSet_Range(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			h.Range(tt.args.f)
@@ -317,7 +317,7 @@ func TestHashSet_Remove(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.Remove(tt.args.o); got != tt.want {
@@ -365,7 +365,7 @@ func TestHashSet_RemoveAll(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.RemoveAll(tt.args.c); got != tt.want {
@@ -409,7 +409,7 @@ func TestHashSet_RetainAll(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.RetainAll(tt.args.c); got != tt.want {
@@ -444,7 +444,7 @@ func TestHashSet_Size(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			if got := h.Size(); got != tt.want {
@@ -471,7 +471,7 @@ func TestHashSet_ToArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			h := hashSet[int]{
+			h := HashSet[int]{
 				m: tt.fields.m,
 			}
 			got := h.ToArray()
@@ -494,9 +494,9 @@ func TestHashSet_ToArray(t *testing.T) {
 func TestNewHashSet(t *testing.T) {
 	tests := []struct {
 		name string
-		want *hashSet[string]
+		want *HashSet[string]
 	}{
-		{"new", &hashSet[string]{
+		{"new", &HashSet[string]{
 			m: make(map[string]any, 16),
 		}},
 	}
@@ -511,19 +511,19 @@ func TestNewHashSet(t *testing.T) {
 
 func TestNewHashSetWith(t *testing.T) {
 	type args struct {
-		c *hashSet[string]
+		c *HashSet[string]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *hashSet[string]
+		want *HashSet[string]
 	}{
 		{
 			name: "new",
-			args: args{c: &hashSet[string]{m: map[string]any{
+			args: args{c: &HashSet[string]{m: map[string]any{
 				"test1": 1,
 			}}},
-			want: &hashSet[string]{m: map[string]any{"test1": struct{}{}}},
+			want: &HashSet[string]{m: map[string]any{"test1": struct{}{}}},
 		},
 	}
 	for _, tt := range tests {
@@ -542,12 +542,12 @@ func TestNewHashSetWithSize(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *hashSet[string]
+		want *HashSet[string]
 	}{
 		{
 			name: "new",
 			args: args{size: 100},
-			want: &hashSet[string]{m: make(map[string]any, 100)},
+			want: &HashSet[string]{m: make(map[string]any, 100)},
 		},
 	}
 	for _, tt := range tests {
@@ -566,12 +566,12 @@ func TestNewHashSetWithThese(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *hashSet[int]
+		want *HashSet[int]
 	}{
 		{
 			name: "new",
 			args: args{[]int{1, 2, 3}},
-			want: &hashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}},
+			want: &HashSet[int]{m: map[int]any{1: struct{}{}, 2: struct{}{}, 3: struct{}{}}},
 		},
 	}
 	for _, tt := range tests {
