@@ -1,4 +1,4 @@
-package gbox_collections
+package collections
 
 import (
 	"reflect"
@@ -79,6 +79,84 @@ func Test_findDupElementInUnComparable(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := FindDupElementInUnComparable(tt.args.slice, tt.args.compareElementFunc); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("FindDupElementInUnComparable() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+type TestObj struct {
+	i   int
+	j   int
+	str string
+}
+
+func TestGroupListToMap(t *testing.T) {
+	type args[T any, K comparable] struct {
+		list    []T
+		keyFunc func(t T) K
+	}
+	type testCase[T any, K comparable] struct {
+		name string
+		args args[T, K]
+		want map[K][]T
+	}
+	tests := []testCase[TestObj, int]{
+		{
+			name: "success",
+			args: args[TestObj, int]{list: []TestObj{{i: 1, j: 2}, {i: 1, j: 3}, {i: 2, j: 4}}, keyFunc: func(t TestObj) int { return t.i }},
+			want: map[int][]TestObj{1: {{i: 1, j: 2}, {i: 1, j: 3}}, 2: {{i: 2, j: 4}}},
+		},
+		{
+			name: "single_success",
+			args: args[TestObj, int]{list: []TestObj{{i: 1, j: 2}}, keyFunc: func(t TestObj) int { return t.i }},
+			want: map[int][]TestObj{1: {{i: 1, j: 2}}},
+		},
+		{
+			name: "empty",
+			args: args[TestObj, int]{list: []TestObj{}, keyFunc: func(t TestObj) int { return t.i }},
+			want: map[int][]TestObj{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GroupListToMap(tt.args.list, tt.args.keyFunc); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("GroupListToMap() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestGroupListToMapString(t *testing.T) {
+	type args[T any, K comparable] struct {
+		list    []T
+		keyFunc func(t T) K
+	}
+	type testCase[T any, K comparable] struct {
+		name string
+		args args[T, K]
+		want map[K][]T
+	}
+	tests := []testCase[TestObj, string]{
+		{
+			name: "success",
+			args: args[TestObj, string]{list: []TestObj{{i: 1, j: 2, str: "test1"}, {i: 1, j: 3, str: "test1"}, {i: 2, j: 4, str: "test2"}}, keyFunc: func(t TestObj) string { return t.str }},
+			want: map[string][]TestObj{"test1": {{i: 1, j: 2, str: "test1"}, {i: 1, j: 3, str: "test1"}}, "test2": {{i: 2, j: 4, str: "test2"}}},
+		},
+		{
+			name: "single_success",
+			args: args[TestObj, string]{list: []TestObj{{i: 1, j: 2, str: "test1"}}, keyFunc: func(t TestObj) string { return t.str }},
+			want: map[string][]TestObj{"test1": {{i: 1, j: 2, str: "test1"}}},
+		},
+		{
+			name: "empty",
+			args: args[TestObj, string]{list: []TestObj{}, keyFunc: func(t TestObj) string { return t.str }},
+			want: map[string][]TestObj{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GroupListToMap(tt.args.list, tt.args.keyFunc); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("GroupListToMap() = %v, want %v", got, tt.want)
 			}
 		})
 	}

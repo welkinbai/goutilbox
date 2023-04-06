@@ -1,4 +1,4 @@
-package gbox_collections
+package collections
 
 func FindDupElement[E comparable](slice []E) []E {
 	checkMap := make(map[E]bool)
@@ -33,6 +33,21 @@ func FindDupElementInUnComparable[E any, O comparable](slice []E, compareElement
 		elementCanCompare := compareElementFunc(one)
 		if checkMap[elementCanCompare] {
 			result = append(result, one)
+		}
+	}
+	return result
+}
+
+func GroupListToMap[K comparable, T any](list []T, keyFunc func(t T) K) map[K][]T {
+	result := make(map[K][]T, len(list))
+	for _, value := range list {
+		k := keyFunc(value)
+		mapList, ok := result[k]
+		if ok {
+			mapList = append(mapList, value)
+			result[k] = mapList
+		} else {
+			result[k] = []T{value}
 		}
 	}
 	return result
